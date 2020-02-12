@@ -157,46 +157,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我的这个博客就是基于hexo搭建的并通过github上传到远端。在搭建之前，我在网上找了好久的教程，虽说教程很多，但写的都比较跳跃式(反正我找到的基本都是这样),不适合我这样的小白，所以迟迟没敢下手，最后灵机一动，去B站上搜了一下，果然发现了好资源，我也是跟着b站上的那个教程搭建的。<br>这里附上网址：<a href="https://www.bilibili.com/video/av44544186?from=search&seid=11555027334930297153" target="_blank" rel="noopener">up主:CodeSheep</a><br><br>下面我将一步一步的介绍如何搭建属于自己的博客(鉴于我用的是mac，所以windows系统的小伙伴可能会有些区别，不过大同小异啦)。</p>
-<h2 id="第一步：下载node-js"><a href="#第一步：下载node-js" class="headerlink" title="第一步：下载node.js"></a>第一步：下载node.js</h2><p>因为hexo需要由node.js支持，所以我们需要先下载node.js。<br>直接附上网址：<a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js下载</a><br>点击这个网址，你会进入到如下这个界面：<br><img src="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/nodejs.png" alt="avatar"><br>我选择的是右边的版本，它的下载十分简单，就是傻瓜式的一直点继续直到最后下载完成。接下来可以在终端查看是否下载成功。打开终端，首先敲入以下命令进入root用户：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo su</span><br></pre></td></tr></table></figure>
-<p>接下来查看node的版本以及npm包管理器的版本(伴随node已经下载下来)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">$ npm -v</span><br></pre></td></tr></table></figure>
-<p>如果下载成功的情况下，将会显示相应的版本<br><img src="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/version.png" alt="avatar"><br>至此，node.js就下载成功了。</p>
-<h2 id="第二步：安装hexo"><a href="#第二步：安装hexo" class="headerlink" title="第二步：安装hexo"></a>第二步：安装hexo</h2><p>我们需要借助npm包管理器来安装，但是由于国内镜像源速度比较的慢，所以我们在真正安装hexo之前先用npm包管理器安装一个cnpm(淘宝的源)，命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<p>以上安装过程可能有点慢，请耐心等待！<br>下载完成后，可以进行测试是否安装成功，如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm -v</span><br></pre></td></tr></table></figure>
-<p>如果下载成功的情况下，将会显示相应的版本<br><img src="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/version2.png" alt="avatar"><br>接下来我们就可以用cnpm真正地去安装hexo了，命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>安装完成后，我们可以查看其版本以检查是否安装成功：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo -v</span><br></pre></td></tr></table></figure>
-<p>如果下载成功的情况下，将会显示相应的版本<br><img src="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/version3.png" alt="avatar"><br>至此，hexo就安装完成了！</p>
-<h2 id="第三步：确保git已经安装"><a href="#第三步：确保git已经安装" class="headerlink" title="第三步：确保git已经安装"></a>第三步：确保git已经安装</h2><p>mac的xcode自带git，可以在终端输入以下命令查看是否已经安装git:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git --version</span><br></pre></td></tr></table></figure>
-<p>如果下载成功的情况下，将会显示相应的版本<br><img src="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/version4.png" alt="avatar"><br>至于windows版本的童鞋，可以去网上查找相应的教程，由于本人没有亲身实验，所以不再详细阐述。</p>
-<h2 id="第四步：用hexo搭建博客"><a href="#第四步：用hexo搭建博客" class="headerlink" title="第四步：用hexo搭建博客"></a>第四步：用hexo搭建博客</h2><p>首先自己先创建一个文件夹，之后所有有关博客的文件都放在这个文件夹里。比如我创建的就是myblog文件夹，创建完成后，我们在命令行中用cd命令进入这一层文件夹，比如在我的电脑里，此时用pwd命令显示如下:<br><img src="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/version5.png" alt="avatar"><br>接着我们输入以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo hexo init</span><br></pre></td></tr></table></figure>
-<p>这个过程比较的慢，甚至可以说很慢。我在下载的时候，刚开始两次下载到一半就没反应了，我索性直接断掉，注意，此时myblog(你刚才新建的文件夹)里面已经有一些下载下来的文件了，我把myblog文件夹直接删除，重新再建一个，然后重复第4步。神奇的是，重来了两遍之后，再第三遍很快的就下载成功了。</p>
-<p>若下载成功，至此，我们就将hexo博客的基础框架搭建起来了。<br>用下面的命令就可以在本地启动博客</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-<p>命令行会出现以下提示：Hexo is running at <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> .<br>我们将这个网址复制并访问，即可在本地查看到该博客。<br>至此，我们就已经在本地将这个博客的框架搭建成功了。</p>
-<p>那么如何写自己的博客呢？<br>同样地，在myblog(你刚才建立的文件夹)这一层文件夹下，在命令行敲入以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo n <span class="string">"博客的名称"</span></span><br></pre></td></tr></table></figure>
-<p>执行了这个命令后，你会在myblog/source/_posts里看到一个文件，文件名就是你刚才在命令行中敲入的博客的名称，以后，你只需要在编辑器里编辑这个文件就行了。(PS:用markdown语法写)<br>然后，在命令行下继续执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo g</span><br></pre></td></tr></table></figure>
-<p>如果想要看看效果，可以再次执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-<h2 id="第五步：借助github部署到远端"><a href="#第五步：借助github部署到远端" class="headerlink" title="第五步：借助github部署到远端"></a>第五步：借助github部署到远端</h2><p>通过github的优点就是它是<strong><em>免费的</em></strong>，当然了，有钱的小伙伴可以自己租服务器使用。如果你没有github账号，那么就将去注册一个。注册完之后，我们登陆到github上，界面如下：<br><img src="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/github.png" alt="avatar"></p>
-<p>点击红色箭头所指的地方，出现如下选项：<br><img src="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/github2.png" alt="avatar"><br>点击New repository,建立一个新的仓库。进入如下界面：<br><img src="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/github3.png" alt="avatar"><br><strong><em>注意</em></strong>：在Repository name处必须这样填写：你的github用户名.github.io  比如说我的就是<em>tanrenxuan.github.io</em>。Description处随意填写，比如：我的博客。之后点击<em>Create repository</em>就可以了。</p>
-<p>接下来，我们回到命令行，通过以下命令安装一个插件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
-<p>下载完成后，我们找到myblog文件夹里一个名叫”_config.yml”的文件。将文件最后改成如下所示：<br><img src="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/configuration.png" alt="avatar"><br><strong><em>注意</em></strong>：repo处填写的应当是自己的仓库的地址，只需要将“tanrenxuan”的地方换成你自己github的github用户名即可。</p>
-<p>最后，我们回到命令行，敲入以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-<p>这样，我们就已经部署完成了。</p>
-<p>检验一下效果，我们在浏览器中输入刚才自己的仓库名，我的是“tanrenxuan.github.io”。最终就可以看到成果了。</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>整个基于hexo搭建博客的流程就是以上所述，当然了，在自己搭建的过程中可能还会遇到一些小问题，可以自己去网上搜一搜解决办法，但基本的流程就是以上所说。在这里,需要感谢B站up主：CodeSheep,因为我就是在他所出的一期博客搭建教程中学会的，小伙伴们也可以直接去他的教程视频里学，毕竟视频讲的肯定会更清楚一些。</p>
-
+        
+          <a class="article-more-a" href="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/#more">more >></a>
+        
       
 
       
