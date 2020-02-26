@@ -165,8 +165,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在看吴恩达的机器学习课程，所以接下来我会将一些学习笔记在此记录下来。这篇笔记主要就是针对一些基础概念的介绍。</p>
-<a id="more"></a>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在看吴恩达的机器学习课程，所以接下来我会将一些学习笔记在此记录下来。这篇笔记主要就是针对一些基础概念的介绍。<br><a id="more"></a></p>
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Arthur Samuel(1959). Machine Learning: Field of study that gives computers the ability to learn without being explicitly programmed.<br>他认为机器学习是：在没有明确设置的情况下，使计算机具有学习能力的研究领域。说白了，机器学习能够让计算机拥有人才拥有的能力“自学习”。</p>
 <p>Tom Mitchell(1998) Well-posed Learning Problem: A computer program is said to learn from experience E with respect to some task T ans some performance measure P, if its performance on T, as measured by P, improves with experience E.<br>相比于第一个定义，Tom Mitchell所给出的这一定义就比较难以理解了。字面翻译就是：一个计算机程序被认为是从经验E中学习关于一些任务T和一些性能度量P，如果它在T上的性能(以P来度量)随着经验E而提高。用吴恩达老师的一个例子就是，在跳棋游戏中，训练计算机学会下棋并最终打败人类，经验E就是<em>程序与自己下几万次跳棋</em>，任务T就是<em>玩跳棋</em>，性能度量P就是<em>与新手玩跳棋时赢的概率</em>。<br>还有个例子如下：<br><img src="/2020/02/23/Machine-Learning-Introduction/ml1.png" alt="avatar"><br>在这个例子中，很明显，任务T就是区分邮件是否为垃圾邮件；经验E就是看你对待不同的邮件并归类的规律；而性能P就是正确归类的概率。总的来说，这个程序用来区分是否为垃圾邮件的能力会随着不断地学习你的分类规律而在性能上不断优化。</p>
 <p>当然了，我觉得对于初学机器学习的我们来说，抠定义其实是一件很无趣也没用的事，远不如先学些简单算法再自己实现一遍有意义。所以，理解到这个程度，心里有个大概的概念就够了。</p>
@@ -439,6 +438,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单变量线性回归</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">多变量线性回归</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -447,7 +454,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">机器学习，单变量线性回归</a>
+                <a href="javascript:void(0)" class="js-tag color5">自我介绍</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">正规方程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">梯度下降算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -456,10 +471,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">链表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">自我介绍</a>
               </li>
             
             <div class="clearfix"></div>
