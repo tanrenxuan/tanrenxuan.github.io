@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2020/02/26/Machine-Learning-%E5%A4%9A%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/1.png">
 <meta property="article:published_time" content="2020-02-26T06:30:08.000Z">
-<meta property="article:modified_time" content="2020-02-26T13:26:21.000Z">
+<meta property="article:modified_time" content="2020-03-03T02:59:47.000Z">
 <meta property="article:author" content="Trenx">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="多变量线性回归">
@@ -208,6 +208,13 @@
 <h2 id="梯度下降算法应用于多变量线性回归"><a href="#梯度下降算法应用于多变量线性回归" class="headerlink" title="梯度下降算法应用于多变量线性回归"></a>梯度下降算法应用于多变量线性回归</h2><p>将梯度下降算法应用于多变量线性回归中，我们将得到如下的算法：<br>repeat until convergence：{</p>
 <script type="math/tex; mode=display">\theta_j:=\theta_j-\alpha\frac{\partial }{\partial \theta_j}J(\theta_0,\theta_1,...\theta_n)(for j=0、1、2...n)</script><p>}<br>等价于<br>repeat until convergence：{</p>
 <script type="math/tex; mode=display">\theta_j:=\theta_j-\alpha \frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})\cdot x^{(i)}_j</script><p>}<br>这和单变量线性回归差不多，但是还是有区别的。首先，$x^{(i)}$不再是一个标量参数，而是作为一个<strong>向量参数</strong>,而最后的$x^{(i)}_j$才表示的是第i组训练样本的第j个参数，也就是一个标量参数。</p>
+<h2 id="matlab求解"><a href="#matlab求解" class="headerlink" title="matlab求解"></a>matlab求解</h2><p>多变量线性回归需要三步：</p>
+<ul>
+<li>标准化特征值</li>
+<li>梯度下降法更新$\theta$</li>
+<li>算出损失函数</li>
+</ul>
+<p>标准化：<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[X_norm, mu, sigma]</span> = <span class="title">featureNormalize</span><span class="params">(X)</span></span></span><br><span class="line"><span class="comment">%FEATURENORMALIZE Normalizes the features in X</span></span><br><span class="line"><span class="comment">%   FEATURENORMALIZE(X) returns a normalized version of X where</span></span><br><span class="line"><span class="comment">%   the mean value of each feature is 0 and the standard deviation</span></span><br><span class="line"><span class="comment">%   is 1. This is often a good preprocessing step to do when</span></span><br><span class="line"><span class="comment">%   working with learning algorithms.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% You need to set these values correctly</span></span><br><span class="line">X_norm = X;</span><br><span class="line">mu = <span class="built_in">zeros</span>(<span class="number">1</span>, <span class="built_in">size</span>(X, <span class="number">2</span>));</span><br><span class="line">sigma = <span class="built_in">zeros</span>(<span class="number">1</span>, <span class="built_in">size</span>(X, <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">mu = <span class="built_in">mean</span>(X);</span><br><span class="line">sigma = std(X);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">size</span>(X_norm,<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="built_in">size</span>(X_norm,<span class="number">1</span>)</span><br><span class="line">        X_norm(<span class="built_in">j</span>,<span class="built_in">i</span>) = (X_norm(<span class="built_in">j</span>,<span class="built_in">i</span>)-mu(<span class="built_in">i</span>))/sigma(<span class="built_in">i</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><br>梯度下降法更新$\theta$<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[theta, J_history]</span> = <span class="title">gradientDescentMulti</span><span class="params">(X, y, theta, alpha, num_iters)</span></span></span><br><span class="line"><span class="comment">%GRADIENTDESCENTMULTI Performs gradient descent to learn theta</span></span><br><span class="line"><span class="comment">%   theta = GRADIENTDESCENTMULTI(x, y, theta, alpha, num_iters) updates theta by</span></span><br><span class="line"><span class="comment">%   taking num_iters gradient steps with learning rate alpha</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% Initialize some useful values</span></span><br><span class="line">m = <span class="built_in">length</span>(y); <span class="comment">% number of training examples</span></span><br><span class="line">J_history = <span class="built_in">zeros</span>(num_iters, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> iter = <span class="number">1</span>:num_iters</span><br><span class="line">    temp = <span class="built_in">zeros</span>(<span class="built_in">size</span>(theta));</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">size</span>(X,<span class="number">2</span>)</span><br><span class="line">        temp(<span class="built_in">i</span>) = theta(<span class="built_in">i</span>) - alpha*sum((X*theta-y).*X(:,<span class="built_in">i</span>))/m;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">size</span>(X,<span class="number">2</span>)</span><br><span class="line">        theta(<span class="built_in">i</span>) = temp(<span class="built_in">i</span>);</span><br><span class="line">    <span class="keyword">end</span>    </span><br><span class="line"></span><br><span class="line">    <span class="comment">% Save the cost J in every iteration    </span></span><br><span class="line">    J_history(iter) = computeCostMulti(X, y, theta);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><br>损失函数的计算和单变量线性回归一样。</p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>本节讲述了多变量线性回归，其与单变量线性回归本质上是一样的，只不过维度变多了，所以有的时候可能没有单变量线性回归那么直观。所以有的时候如果你突然分辨不清多变量线性回归中各个参数的含义，有一种混乱的感觉时，不妨自己给它降维，先让自己理解清楚算法本质，再回过头来看多变量线性回归。</p>
 
       
@@ -334,7 +341,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整体算法过程"><span class="toc-number">2.</span> <span class="toc-text">整体算法过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降算法应用于多变量线性回归"><span class="toc-number">3.</span> <span class="toc-text">梯度下降算法应用于多变量线性回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">4.</span> <span class="toc-text">结语</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整体算法过程"><span class="toc-number">2.</span> <span class="toc-text">整体算法过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降算法应用于多变量线性回归"><span class="toc-number">3.</span> <span class="toc-text">梯度下降算法应用于多变量线性回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#matlab求解"><span class="toc-number">4.</span> <span class="toc-text">matlab求解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -471,11 +478,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单变量线性回归</a>
+                <a href="javascript:void(0)" class="js-tag color5">Logistic Regression</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">分类</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">多变量线性回归</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单变量线性回归</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">梯度下降算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -491,19 +510,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">正规方程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">梯度下降算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">链表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">正规方程</a>
               </li>
             
             <div class="clearfix"></div>
