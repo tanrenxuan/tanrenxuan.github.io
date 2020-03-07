@@ -6,26 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>梯度下降算法的技巧 | Trenx</title>
+  <title>Trenx</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言无论是单变量线性回归，还是多变量线性回归，我们都需要用梯度下降算法求得损失函数的最小值以及最优参数。可见，梯度下降算法无疑是算法中最重要的部分。那么在实际使用时，我们应当如何用好梯度下降算法呢？">
-<meta property="og:type" content="article">
-<meta property="og:title" content="梯度下降算法的技巧">
-<meta property="og:url" content="http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Trenx">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Trenx">
-<meta property="og:description" content="前言无论是单变量线性回归，还是多变量线性回归，我们都需要用梯度下降算法求得损失函数的最小值以及最优参数。可见，梯度下降算法无疑是算法中最重要的部分。那么在实际使用时，我们应当如何用好梯度下降算法呢？">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/1.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/2.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/3.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/4.png">
-<meta property="article:published_time" content="2020-02-26T07:54:41.000Z">
-<meta property="article:modified_time" content="2020-02-26T13:02:46.000Z">
 <meta property="article:author" content="Trenx">
-<meta property="article:tag" content="机器学习">
-<meta property="article:tag" content="梯度下降算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Trenx" type="application/atom+xml">
   
@@ -145,38 +134,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-梯度下降算法的技巧" class="article article-type-post " itemscope itemprop="blogPost">
+            
+  
+    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      梯度下降算法的技巧
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/10/hello-world/">Hello World</a>
     </h1>
   
 
         
-        <a href="/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/" class="archive-article-date">
-  	<time datetime="2020-02-26T07:54:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-26</time>
+        <a href="/2020/02/10/hello-world/" class="archive-article-date">
+  	<time datetime="2020-02-10T07:37:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>无论是单变量线性回归，还是多变量线性回归，我们都需要用梯度下降算法求得损失函数的最小值以及最优参数。可见，梯度下降算法无疑是算法中最重要的部分。那么在实际使用时，我们应当如何用好梯度下降算法呢？<br><a id="more"></a></p>
-<h2 id="技巧1-特征缩放"><a href="#技巧1-特征缩放" class="headerlink" title="技巧1:特征缩放"></a>技巧1:特征缩放</h2><p><strong>确保每一个特征值的范围都大致相同</strong></p>
-<h3 id="除以最大值"><a href="#除以最大值" class="headerlink" title="除以最大值"></a>除以最大值</h3><p>比如：<br>$x_1$=size(0-2000$feet^2$)<br>$x_2$=number of bedrooms(1-5)<br>那么使用梯度下降算法时，如下图所示，将是一个非常扁的椭圆形等高线。在这种情况下，梯度下降寻找最小点的过程将会非常慢。<br><img src="/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/1.png" alt="avatar"><br>在上述这种情形下，我们就需要进行特征缩放，如下：<br>$x_1=\frac{size(feet^2)}{2000}$<br>$x_2=\frac{number of bedrooms}{5}$<br>那么使用梯度下降算法时将会出现如下图所示这样，等高线更加圆，梯度下降也会更快(有数学证明)<br><img src="/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/2.png" alt="avatar"><br>所以，我们的特征缩放将会使两个特征的取值范围更小，且大致相等。在上面的例子中我们最终的效果是：<script type="math/tex">-1\leqslant x_i \leqslant1</script><br>当然了，不一定非要精确到上图所示那样，一般来说，在这个上下波动很小的范围都可以。同样地，如果范围太小，比如：<script type="math/tex">-0.0001\leqslant x_i \leqslant0.0001</script>，也需要进行放大。<br>吴恩达老师一般将数据控制在[-3,+3]或者[$-\frac{1}{3},\frac{1}{3}$]都是可以的。</p>
-<h3 id="均值归一化"><a href="#均值归一化" class="headerlink" title="均值归一化"></a>均值归一化</h3><p>顾名思义就是让特征值的均值为0。<br>公式如下：</p>
-<script type="math/tex; mode=display">x_1=\frac{size-1000}{2000}</script><script type="math/tex; mode=display">x_2=\frac{bedrooms-2}{5}</script><p>这样一来，特征值的范围就是：$-0.5\leqslant x_1 \leqslant 0.5$;$-0.5 \leqslant x_2 \leqslant 0.5$<br>更一般的，公式如下：</p>
-<script type="math/tex; mode=display">x_1:=\frac{x_1-\mu_1}{s_1}</script><p><em>注：$\mu_1$表示训练集中该特征值的平均值，$s_1$可以是极值，也可以是标准差</em></p>
-<h2 id="技巧2-学习率"><a href="#技巧2-学习率" class="headerlink" title="技巧2:学习率"></a>技巧2:学习率</h2><h3 id="调试“学习率”"><a href="#调试“学习率”" class="headerlink" title="调试“学习率”"></a>调试“学习率”</h3><p>我们可以通过画出如下的“迭代图”来判断梯度下降算法是否正确运行。<br><img src="/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/3.png" alt="avatar"><br>如上图所示，当曲线已经平滑时，我们认为它收敛了。</p>
-<h3 id="自动收敛测试"><a href="#自动收敛测试" class="headerlink" title="自动收敛测试"></a>自动收敛测试</h3><p>还有一种方法就是通过自动收敛测试来控制程序的执行。当损失函数在一次迭代中只下降了小于$\varepsilon$时，我们认为它已经收敛了。比如，$\varepsilon$可以取为$10^{(-3)}$。但是，我们一般在选取这个$\varepsilon$时会拿捏不准，所以也可以采取上图那样，通过画出“迭代图”来判断，当然了，对于不同的问题，算法收敛需要的迭代次数差异会非常大，可能30此迭代就收敛了，也可能达到300万次。</p>
-<p>需要说明的是，当你遇见了如下的问题时：<br><img src="/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/4.png" alt="avatar"><br>大概率都是因为学习率$\alpha$选大了，通过减小学习率可以有效改正。<strong>经过数学家证明,只要学习率选取的足够小，那么每次迭代，损失函数必定会下降</strong>，所以当你遇见损失函数上升的情况，那一定有问题。<br>那么，应当如何选取学习率呢？一般来说，可以多次尝试不同的学习率的效果，比如从0.001-&gt;0.003-&gt;0.01-&gt;0.03-&gt;0.1-&gt;0.3-&gt;1，按这种方法调试下去。</p>
-<h2 id="技巧3-特征和多项式回归"><a href="#技巧3-特征和多项式回归" class="headerlink" title="技巧3:特征和多项式回归"></a>技巧3:特征和多项式回归</h2><h3 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h3><p>很多时候，我们不一定只能用训练集所给特征值，我们还可以将这些特征值组合起来形成新的特征值，比如说给了长和宽，我们可以构造面积这一新特征，或许会有出乎意料的效果。</p>
-<h3 id="多项式回归"><a href="#多项式回归" class="headerlink" title="多项式回归"></a>多项式回归</h3><p>除了线性回归外，我们还可以选择诸如二次函数等其他回归函数。对于房价预测的例子，我们可以这样构造回归函数：</p>
-<script type="math/tex; mode=display">h_{\theta}=\theta_0+\theta_1x+\theta_2x^2+\theta_3x^3</script>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
       
 
       
@@ -184,102 +173,19 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">梯度下降算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
-
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/10/hello-world/">展开全文 >></a>
+        </p>
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/02/26/%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          正规方程
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/02/26/Machine-Learning-%E5%A4%9A%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Machine Learning 多变量线性回归</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -294,32 +200,17 @@
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#技巧1-特征缩放"><span class="toc-number">2.</span> <span class="toc-text">技巧1:特征缩放</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#除以最大值"><span class="toc-number">2.1.</span> <span class="toc-text">除以最大值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#均值归一化"><span class="toc-number">2.2.</span> <span class="toc-text">均值归一化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#技巧2-学习率"><span class="toc-number">3.</span> <span class="toc-text">技巧2:学习率</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#调试“学习率”"><span class="toc-number">3.1.</span> <span class="toc-text">调试“学习率”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动收敛测试"><span class="toc-number">3.2.</span> <span class="toc-text">自动收敛测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#技巧3-特征和多项式回归"><span class="toc-number">4.</span> <span class="toc-text">技巧3:特征和多项式回归</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特征选择"><span class="toc-number">4.1.</span> <span class="toc-text">特征选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多项式回归"><span class="toc-number">4.2.</span> <span class="toc-text">多项式回归</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
     </div>
 </aside>
 
 
 
-  
-  
-  
 
   
-
   
-
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -342,8 +233,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

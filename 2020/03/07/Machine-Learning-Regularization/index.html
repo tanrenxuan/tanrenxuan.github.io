@@ -6,26 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>梯度下降算法的技巧 | Trenx</title>
+  <title>Machine Learning Regularization | Trenx</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言无论是单变量线性回归，还是多变量线性回归，我们都需要用梯度下降算法求得损失函数的最小值以及最优参数。可见，梯度下降算法无疑是算法中最重要的部分。那么在实际使用时，我们应当如何用好梯度下降算法呢？">
+  <meta name="description" content="前言在利用某些机器学习算法来拟合参数$\theta$时，我们希望拟合出来的参数能够较好的贴合已知的训练集数据，否则，我们称那些不能够很好契合原数据的参数为“欠拟合(underfitting)”。然而，如果拟合的过好，也未必是一件好事。试想，若拟合的十分贴合，则这些参数可能将原本属于这个训练集的一些特殊属性包含进去了，然而这些特殊属性可能只是一些偶然导致的，不是一般规律，这样一来，就会使得模型的泛化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="梯度下降算法的技巧">
-<meta property="og:url" content="http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/index.html">
+<meta property="og:title" content="Machine Learning Regularization">
+<meta property="og:url" content="http://yoursite.com/2020/03/07/Machine-Learning-Regularization/index.html">
 <meta property="og:site_name" content="Trenx">
-<meta property="og:description" content="前言无论是单变量线性回归，还是多变量线性回归，我们都需要用梯度下降算法求得损失函数的最小值以及最优参数。可见，梯度下降算法无疑是算法中最重要的部分。那么在实际使用时，我们应当如何用好梯度下降算法呢？">
+<meta property="og:description" content="前言在利用某些机器学习算法来拟合参数$\theta$时，我们希望拟合出来的参数能够较好的贴合已知的训练集数据，否则，我们称那些不能够很好契合原数据的参数为“欠拟合(underfitting)”。然而，如果拟合的过好，也未必是一件好事。试想，若拟合的十分贴合，则这些参数可能将原本属于这个训练集的一些特殊属性包含进去了，然而这些特殊属性可能只是一些偶然导致的，不是一般规律，这样一来，就会使得模型的泛化">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/1.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/2.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/3.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/4.png">
-<meta property="article:published_time" content="2020-02-26T07:54:41.000Z">
-<meta property="article:modified_time" content="2020-02-26T13:02:46.000Z">
+<meta property="og:image" content="http://yoursite.com/2020/03/07/Machine-Learning-Regularization/1.png">
+<meta property="article:published_time" content="2020-03-07T07:28:14.000Z">
+<meta property="article:modified_time" content="2020-03-07T09:11:03.000Z">
 <meta property="article:author" content="Trenx">
 <meta property="article:tag" content="机器学习">
-<meta property="article:tag" content="梯度下降算法">
+<meta property="article:tag" content="正则化">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/07/Machine-Learning-Regularization/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Trenx" type="application/atom+xml">
   
@@ -145,38 +142,57 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-梯度下降算法的技巧" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Machine-Learning-Regularization" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      梯度下降算法的技巧
+      Machine Learning Regularization
     </h1>
   
 
         
-        <a href="/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/" class="archive-article-date">
-  	<time datetime="2020-02-26T07:54:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-26</time>
+        <a href="/2020/03/07/Machine-Learning-Regularization/" class="archive-article-date">
+  	<time datetime="2020-03-07T07:28:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>无论是单变量线性回归，还是多变量线性回归，我们都需要用梯度下降算法求得损失函数的最小值以及最优参数。可见，梯度下降算法无疑是算法中最重要的部分。那么在实际使用时，我们应当如何用好梯度下降算法呢？<br><a id="more"></a></p>
-<h2 id="技巧1-特征缩放"><a href="#技巧1-特征缩放" class="headerlink" title="技巧1:特征缩放"></a>技巧1:特征缩放</h2><p><strong>确保每一个特征值的范围都大致相同</strong></p>
-<h3 id="除以最大值"><a href="#除以最大值" class="headerlink" title="除以最大值"></a>除以最大值</h3><p>比如：<br>$x_1$=size(0-2000$feet^2$)<br>$x_2$=number of bedrooms(1-5)<br>那么使用梯度下降算法时，如下图所示，将是一个非常扁的椭圆形等高线。在这种情况下，梯度下降寻找最小点的过程将会非常慢。<br><img src="/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/1.png" alt="avatar"><br>在上述这种情形下，我们就需要进行特征缩放，如下：<br>$x_1=\frac{size(feet^2)}{2000}$<br>$x_2=\frac{number of bedrooms}{5}$<br>那么使用梯度下降算法时将会出现如下图所示这样，等高线更加圆，梯度下降也会更快(有数学证明)<br><img src="/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/2.png" alt="avatar"><br>所以，我们的特征缩放将会使两个特征的取值范围更小，且大致相等。在上面的例子中我们最终的效果是：<script type="math/tex">-1\leqslant x_i \leqslant1</script><br>当然了，不一定非要精确到上图所示那样，一般来说，在这个上下波动很小的范围都可以。同样地，如果范围太小，比如：<script type="math/tex">-0.0001\leqslant x_i \leqslant0.0001</script>，也需要进行放大。<br>吴恩达老师一般将数据控制在[-3,+3]或者[$-\frac{1}{3},\frac{1}{3}$]都是可以的。</p>
-<h3 id="均值归一化"><a href="#均值归一化" class="headerlink" title="均值归一化"></a>均值归一化</h3><p>顾名思义就是让特征值的均值为0。<br>公式如下：</p>
-<script type="math/tex; mode=display">x_1=\frac{size-1000}{2000}</script><script type="math/tex; mode=display">x_2=\frac{bedrooms-2}{5}</script><p>这样一来，特征值的范围就是：$-0.5\leqslant x_1 \leqslant 0.5$;$-0.5 \leqslant x_2 \leqslant 0.5$<br>更一般的，公式如下：</p>
-<script type="math/tex; mode=display">x_1:=\frac{x_1-\mu_1}{s_1}</script><p><em>注：$\mu_1$表示训练集中该特征值的平均值，$s_1$可以是极值，也可以是标准差</em></p>
-<h2 id="技巧2-学习率"><a href="#技巧2-学习率" class="headerlink" title="技巧2:学习率"></a>技巧2:学习率</h2><h3 id="调试“学习率”"><a href="#调试“学习率”" class="headerlink" title="调试“学习率”"></a>调试“学习率”</h3><p>我们可以通过画出如下的“迭代图”来判断梯度下降算法是否正确运行。<br><img src="/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/3.png" alt="avatar"><br>如上图所示，当曲线已经平滑时，我们认为它收敛了。</p>
-<h3 id="自动收敛测试"><a href="#自动收敛测试" class="headerlink" title="自动收敛测试"></a>自动收敛测试</h3><p>还有一种方法就是通过自动收敛测试来控制程序的执行。当损失函数在一次迭代中只下降了小于$\varepsilon$时，我们认为它已经收敛了。比如，$\varepsilon$可以取为$10^{(-3)}$。但是，我们一般在选取这个$\varepsilon$时会拿捏不准，所以也可以采取上图那样，通过画出“迭代图”来判断，当然了，对于不同的问题，算法收敛需要的迭代次数差异会非常大，可能30此迭代就收敛了，也可能达到300万次。</p>
-<p>需要说明的是，当你遇见了如下的问题时：<br><img src="/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/4.png" alt="avatar"><br>大概率都是因为学习率$\alpha$选大了，通过减小学习率可以有效改正。<strong>经过数学家证明,只要学习率选取的足够小，那么每次迭代，损失函数必定会下降</strong>，所以当你遇见损失函数上升的情况，那一定有问题。<br>那么，应当如何选取学习率呢？一般来说，可以多次尝试不同的学习率的效果，比如从0.001-&gt;0.003-&gt;0.01-&gt;0.03-&gt;0.1-&gt;0.3-&gt;1，按这种方法调试下去。</p>
-<h2 id="技巧3-特征和多项式回归"><a href="#技巧3-特征和多项式回归" class="headerlink" title="技巧3:特征和多项式回归"></a>技巧3:特征和多项式回归</h2><h3 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h3><p>很多时候，我们不一定只能用训练集所给特征值，我们还可以将这些特征值组合起来形成新的特征值，比如说给了长和宽，我们可以构造面积这一新特征，或许会有出乎意料的效果。</p>
-<h3 id="多项式回归"><a href="#多项式回归" class="headerlink" title="多项式回归"></a>多项式回归</h3><p>除了线性回归外，我们还可以选择诸如二次函数等其他回归函数。对于房价预测的例子，我们可以这样构造回归函数：</p>
-<script type="math/tex; mode=display">h_{\theta}=\theta_0+\theta_1x+\theta_2x^2+\theta_3x^3</script>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在利用某些机器学习算法来拟合参数$\theta$时，我们希望拟合出来的参数能够较好的贴合已知的训练集数据，否则，我们称那些不能够很好契合原数据的参数为“<strong>欠拟合(underfitting)</strong>”。然而，如果拟合的过好，也未必是一件好事。试想，若拟合的十分贴合，则这些参数可能将原本属于这个训练集的一些特殊属性包含进去了，然而这些特殊属性可能只是一些偶然导致的，不是一般规律，这样一来，就会使得模型的<strong>泛化(generalization)</strong>能力较弱，这就走到了另一个极端”<strong>过拟合(overfitting)</strong>“。这篇文章主要讲述<strong>正则化(regularization)</strong>，来解决过拟合问题。<br><a id="more"></a></p>
+<h2 id="过拟合"><a href="#过拟合" class="headerlink" title="过拟合"></a>过拟合</h2><p><img src="/2020/03/07/Machine-Learning-Regularization/1.png" alt="avatar"><br>从上面这三幅图中，我们来直观的感受一下”欠拟合”和”过拟合”。最左边这幅图，我们认为它是“欠拟合”，因为他没有很好的使得假设函数贴合这些样本点；中间这幅图，我们认为拟合的较好，因此得出来的模型也能够很好的预测；最右边这幅图，我们认为它“过拟合”，因为它完全贴合这些点以至于得到的假设函数失去了一般性，泛化能力很差，即当我们用这个假设函数去预测新房价时，得出来的结果会很不符合实际。</p>
+<p>为了解决过拟合，我们可以采取以下方法：</p>
+<ul>
+<li>减少特征的数量</li>
+<li>正则化</li>
+</ul>
+<p>对于第一种方法，我们可以采取如下两种操作：1、人为的选择出一些比较重要的特征，丢弃某些无关紧要的特征，但是用这种方法我们很难保证能够选择到位。2、使用一种模型来选择。这种模型可以自动帮我们选择特征，这在以后会学习。<br>对于第二种方法，我们并没有减少特征的数量，而只是将每一种特征前的参数$\theta_j$缩小。这样一来，我们可以减少每一种特征对整体的影响，使它不至于过拟合，同时也保证了所有特征都保留下。</p>
+<h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><p>正则化其实就是对损失函数$J(\theta)$进行一些调整，加上以下这一项:</p>
+<script type="math/tex; mode=display">\frac{\lambda}{2m}\sum_{j=1}^n\theta_j^2</script><p>其中$\lambda$&gt;0,是正则化参数，<em>注意:并没有$\theta_0$这一项</em>:。我们现在来研究一下这一项，为什么要将所有参数的平方之和加到损失函数之后呢。试想，有了这一项后，为了使得损失函数最小化，那么这些参数势必需要变得更小才能达到这一目的。而当各个参数变得更小时，那么函数图像将会更加平缓，不再过拟合。<br>$\lambda$这个值的大小也有讲究：若$\lambda$过大，则会使得函数过于平缓，以至于欠拟合。而若$\lambda$过小，甚至为0,那么将对过拟合现象没有发挥应有作用。</p>
+<h3 id="正则化应用于线性回归"><a href="#正则化应用于线性回归" class="headerlink" title="正则化应用于线性回归"></a>正则化应用于线性回归</h3><p>我们知道，原先对于线性回归，其损失函数如下：</p>
+<script type="math/tex; mode=display">J(\theta)= \frac{1}{2m}\sum_{i=1}^{m}{(h_\theta(x^{(i)})-y^{(i)})}^2</script><p> 现在，经过正则化，损失函数如下：</p>
+<script type="math/tex; mode=display">J(\theta)= \frac{1}{2m}\big[\sum_{i=1}^{m}{(h_\theta(x^{(i)})-y^{(i)})}^2+\lambda\sum_{j=1}^n\theta_j^2\big]</script><p>对于梯度下降算法，我们将得到这样的形式:<br>repeat{</p>
+<script type="math/tex; mode=display">\theta_0:=\theta_0-\alpha \frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})\cdot x^{(i)}_0</script><script type="math/tex; mode=display">\theta_j:=\theta_j-\alpha[\big( \frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})\cdot x^{(i)}_j\big)+\frac{\lambda}{m}\theta_j]</script><p>}<br>进行同类型合并，得到如下所示:</p>
+<script type="math/tex; mode=display">\theta_j:=\theta_j(1-\alpha\frac{\lambda}{m})-\alpha \frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})\cdot x^{(i)}_j</script><p>同样地，再利用正规方程求解时，由于损失函数改变了，我们的矩阵运算也要加以修改。原来的公式如下:</p>
+<script type="math/tex; mode=display">\theta=(X^TX)^{-1}X^TY</script><p>现在，改为如下:</p>
+<script type="math/tex; mode=display">\theta=(X^TX+\lambda \cdot L)^{-1}X^TY</script><p>其中，L矩阵如下：</p>
+<script type="math/tex; mode=display">
+L_{(n+1)*(n+1)}=
+\begin{bmatrix}
+0&&&&\\
+&1&&&\\
+&&1&&\\
+&&&\ddots&\\
+&&&&1\\
+\end{bmatrix}</script><p>我们在之前说过$(X^TX)^{-1}$可能不存在(比如当m&lt;n时)，那么现在，$(X^TX+\lambda \cdot L)^{-1}$则必定存在了。</p>
+<h3 id="正则化应用于Logistic回归"><a href="#正则化应用于Logistic回归" class="headerlink" title="正则化应用于Logistic回归"></a>正则化应用于Logistic回归</h3><p>我们回顾一下，在Logistic回归中，我们的损失函数如下:</p>
+<script type="math/tex; mode=display">J(\theta)=-\frac{1}{m}\sum_{i=1}^{m}[  y^{(i)}log(h_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))   ]</script><p>可经过正则化，我们的损失函数如下：</p>
+<script type="math/tex; mode=display">J(\theta)=-\frac{1}{m}\sum_{i=1}^{m}[ y^{(i)}log(h_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)})) ]+\frac{\lambda}{2m}\sum_{j=1}^n\theta_j^2</script><p>那么梯度下降法的形式就是如下：<br>Repeat{</p>
+<script type="math/tex; mode=display">\theta_0:=\theta_0-\alpha \frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})\cdot x^{(i)}_0</script><script type="math/tex; mode=display">\theta_j:=\theta_j-\alpha\big[\big(\frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}\big)+\frac{\lambda}{m}\theta_j\big]</script><p>}<br><em>注意，这里其实形式上和线性回归是一模一样的，区别就在于$h_\theta(x)$</em></p>
+
       
 
       
@@ -193,7 +209,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">梯度下降算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">正则化</a>
         		</li>
       		
 		</ul>
@@ -249,7 +265,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/26/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%8A%80%E5%B7%A7/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/07/Machine-Learning-Regularization/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -263,18 +279,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/02/26/%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          正规方程
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/02/26/Machine-Learning-%E5%A4%9A%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Machine Learning 多变量线性回归</div>
+    <a href="/2020/03/06/Machine-Learning-Logistic-Regression/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Machine Learning Logistic Regression</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -301,7 +308,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#技巧1-特征缩放"><span class="toc-number">2.</span> <span class="toc-text">技巧1:特征缩放</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#除以最大值"><span class="toc-number">2.1.</span> <span class="toc-text">除以最大值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#均值归一化"><span class="toc-number">2.2.</span> <span class="toc-text">均值归一化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#技巧2-学习率"><span class="toc-number">3.</span> <span class="toc-text">技巧2:学习率</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#调试“学习率”"><span class="toc-number">3.1.</span> <span class="toc-text">调试“学习率”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动收敛测试"><span class="toc-number">3.2.</span> <span class="toc-text">自动收敛测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#技巧3-特征和多项式回归"><span class="toc-number">4.</span> <span class="toc-text">技巧3:特征和多项式回归</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特征选择"><span class="toc-number">4.1.</span> <span class="toc-text">特征选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多项式回归"><span class="toc-number">4.2.</span> <span class="toc-text">多项式回归</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过拟合"><span class="toc-number">2.</span> <span class="toc-text">过拟合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则化"><span class="toc-number">3.</span> <span class="toc-text">正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#正则化应用于线性回归"><span class="toc-number">3.1.</span> <span class="toc-text">正则化应用于线性回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正则化应用于Logistic回归"><span class="toc-number">3.2.</span> <span class="toc-text">正则化应用于Logistic回归</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
