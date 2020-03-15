@@ -6,26 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Machine Learning Logistic Regression | Trenx</title>
+  <title>Tag: 神经网络 | Trenx</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言在监督学习中，除了回归问题外，还有一类问题：分类。与回归不同，分类的结果是将输入量映射成一些离散的值。比如给出一封邮件，判断它否为垃圾邮件(用0、1表示)等等。在这篇文章中，主要介绍Logistic Regression来进行分类。(虽然叫做Regression，但其实它是分类算法)">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Machine Learning Logistic Regression">
-<meta property="og:url" content="http://yoursite.com/2020/03/06/Machine-Learning-Logistic-Regression/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Trenx">
+<meta property="og:url" content="http://yoursite.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html">
 <meta property="og:site_name" content="Trenx">
-<meta property="og:description" content="前言在监督学习中，除了回归问题外，还有一类问题：分类。与回归不同，分类的结果是将输入量映射成一些离散的值。比如给出一封邮件，判断它否为垃圾邮件(用0、1表示)等等。在这篇文章中，主要介绍Logistic Regression来进行分类。(虽然叫做Regression，但其实它是分类算法)">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/2020/03/06/Machine-Learning-Logistic-Regression/1.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/06/Machine-Learning-Logistic-Regression/2.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/06/Machine-Learning-Logistic-Regression/3.png">
-<meta property="article:published_time" content="2020-03-06T03:14:29.000Z">
-<meta property="article:modified_time" content="2020-03-07T08:30:20.000Z">
 <meta property="article:author" content="Trenx">
-<meta property="article:tag" content="机器学习">
-<meta property="article:tag" content="Logistic Regression">
-<meta property="article:tag" content="分类">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/03/06/Machine-Learning-Logistic-Regression/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Trenx" type="application/atom+xml">
   
@@ -145,66 +134,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Machine-Learning-Logistic-Regression" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Machine Learning Logistic Regression
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/03/15/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%89%8D%E5%90%91%E4%BC%A0%E6%92%AD/" class="archive-article-date">
+  	<time datetime="2020-03-15T08:26:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-15</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/03/15/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%89%8D%E5%90%91%E4%BC%A0%E6%92%AD/">神经网络-前向传播</a>
     </h1>
   
 
-        
-        <a href="/2020/03/06/Machine-Learning-Logistic-Regression/" class="archive-article-date">
-  	<time datetime="2020-03-06T03:14:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在监督学习中，除了回归问题外，还有一类问题：分类。与回归不同，分类的结果是将输入量映射成一些离散的值。比如给出一封邮件，判断它否为垃圾邮件(用0、1表示)等等。在这篇文章中，主要介绍Logistic Regression来进行分类。(虽然叫做Regression，但其实它是分类算法)<br><a id="more"></a></p>
-<h2 id="Hypothesis-function"><a href="#Hypothesis-function" class="headerlink" title="Hypothesis function"></a>Hypothesis function</h2><p>在线性回归中，我们假设$h_{\theta}(x)=\theta^TX$,那么能否直接用这个函数来表示分类算法中的假设函数呢？显然不可以，因为如果用这个函数，那么其输出很有可能大于1或者小于0，这对于y只能取{0、1}的分类问题来说显然是有问题的。所以，我们需要的$h_\theta(x)$，它的值域应当是在0-1之间。即满足$h_{\theta}(x)=g(\theta^TX)$,其中$g(\theta^TX)$应当在0-1之间。<br>我们引入了Sigmoid function(Logistic function),它的定义如下：</p>
-<script type="math/tex; mode=display">g(z)=\frac{1}{1+e^{-z}}</script><p>该函数的图像如下所示：<br><img src="/2020/03/06/Machine-Learning-Logistic-Regression/1.png" alt="avatar"><br>所以说，我们得到:</p>
-<script type="math/tex; mode=display">h_{\theta}(x)=\frac{1}{1+e^{-\theta^TX}}</script><p>有了这个假设函数后，当我们输入变量X的值时，便会得到对应的y值,我们定义如下：</p>
-<script type="math/tex; mode=display">
-\begin{cases}
-y=1,h_\theta(x)\geq0.5\\
-y=0,h_\theta(x)<0.5\\
-\end{cases}</script><p>显然，这个条件是可以等价转换成如下形式的:</p>
-<script type="math/tex; mode=display">
-\begin{cases}
-y=1,\theta^TX\geq0\\
-y=0,\theta^TX<0\\
-\end{cases}</script><h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>有了假设函数后，我们需要根据损失函数来拟合出$\theta$的值。但是，如果我们依然按照之前定义的损失函数$J(\theta)$,那么可以知道该损失函数将不会是凸函数，那么$J(\theta)$的函数将会如下左图所示：<br><img src="/2020/03/06/Machine-Learning-Logistic-Regression/2.png" alt="avatar"><br>显然，在这种情况下，如果用梯度函数下降法，那么很难找到全局最优值，因此，我们希望$J(\theta)$是如右边这样一个“碗状”的函数图像。<br>所以，我们修改一下损失函数，变为如下形式：</p>
-<script type="math/tex; mode=display">J(\theta)=\frac{1}{m}\sum_{i=1}^{m}Cost(h_{\theta}(x^{(i)}),y^{(i)})</script><p>而$Cost(h_{\theta}(x^{(i)}),y^{(i)})$的定义如下所示:</p>
-<script type="math/tex; mode=display">
-Cost(h_{\theta}(x^{(i)}),y^{(i)})=
-\begin{cases}
--log(h_\theta(x^{(i)})),（y^{(i)}=1）\\
--log(1-h_\theta(x^{(i)})),（y^{(i)}=0）\\
-\end{cases}</script><p>我们可以将$Cost(h_{\theta}(x^{(i)}),y^{(i)})$转换成一个式子，如下:</p>
-<script type="math/tex; mode=display">Cost(h_{\theta}(x^{(i)}),y^{(i)})=-y^{(i)}log(h_\theta(x^{(i)}))-(1-y^{(i)})log(1-h_\theta(x^{(i)}))</script><p>最终，我们的$J(\theta)$的表达式如下所示:</p>
-<script type="math/tex; mode=display">J(\theta)=-\frac{1}{m}\sum_{i=1}^{m}[  y^{(i)}log(h_\theta(x^{(i)}))+(1-y^{(i)})log(1-h_\theta(x^{(i)}))   ]</script><h2 id="梯度下降法用于Logistic回归"><a href="#梯度下降法用于Logistic回归" class="headerlink" title="梯度下降法用于Logistic回归"></a>梯度下降法用于Logistic回归</h2><p>repeat until convergence{</p>
-<script type="math/tex; mode=display">\theta_j:=\theta_j-\alpha\frac{\partial }{\partial \theta_j}J(\theta)</script><p>}<br>将$j(\theta)$代入其中，我们可以得到如下算法过程:<br>repeat until convergence{</p>
-<script type="math/tex; mode=display">\theta_j:=\theta_j-\frac{\alpha}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}</script><p>}<br>当然了，我们可以将其向量化：</p>
-<script type="math/tex; mode=display">\theta:=\theta-\frac{\alpha}{m}X^T(g(X\theta)-\vec y)</script><h2 id="高级优化"><a href="#高级优化" class="headerlink" title="高级优化"></a>高级优化</h2><p>如:Conjugate gradient、BFGS、L-BFGS。它们都比之前所述的梯度下降法更有效，对于一般人来说，并不需要理解里面具体的复杂算法，毕竟已经有相关专家编写出了经过优化的算法，我们只需要在相关编程语言的库中找到该函数并能够加以使用即可。<br>对于这些更高级的算法，我们只需要自己做的工作就是两个</p>
-<ul>
-<li>算出$J(\theta)$</li>
-<li>算出$\frac{\partial}{\partial \theta_j}J(\theta)$</li>
-</ul>
-<p>在matlab中，我们可以这用使用:<br>首先定义一个函数costFunction(theta)<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[jval,gradient]</span> = <span class="title">costFunction</span><span class="params">(theta)</span></span></span><br><span class="line">    jVal = [...code to compute J(theta)...];</span><br><span class="line">    gradient = [...code to compute derivative of J(theta)...];</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><br>这个函数需要给出$J(\theta)$的表达式和$\frac{\partial}{\partial \theta_j}J(\theta)$的表达式。$J(\theta)$只有一个，而$\frac{\partial}{\partial \theta_j}J(\theta)$需要写出分别对每一个\theta的偏导数。<br>之后，就可以直接调用matlab中的函数fminunc。<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">options = optimset(<span class="string">'GradObj'</span>,<span class="string">'on'</span>,<span class="string">'MaxIter'</span>,<span class="number">100</span>);</span><br><span class="line">initialTheta = <span class="built_in">zeros</span>(<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">    [optTheta,functionVal,exitFlag] = fminunc(@costFunction,initialTheta,options)</span><br></pre></td></tr></table></figure></p>
-<h2 id="多分类问题拓展"><a href="#多分类问题拓展" class="headerlink" title="多分类问题拓展"></a>多分类问题拓展</h2><p>对于多分类问题，其实可以先转化为二分类，再来做。<br>如下图所示的三分类问题求解:<br><img src="/2020/03/06/Machine-Learning-Logistic-Regression/3.png" alt="avatar"><br>如我们要计算P(y=1)时，就将$y\neq1$的所有值都看成同一类。其他以此类推，最终我们算出了y等于每一个值的概率，取最大的即可。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -214,138 +173,25 @@ Cost(h_{\theta}(x^{(i)}),y^{(i)})=
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Logistic Regression</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">分类</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">神经网络</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/06/Machine-Learning-Logistic-Regression/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/03/07/Machine-Learning-Regularization/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Machine Learning Regularization
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/02/26/%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">正规方程</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hypothesis-function"><span class="toc-number">2.</span> <span class="toc-text">Hypothesis function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#损失函数"><span class="toc-number">3.</span> <span class="toc-text">损失函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降法用于Logistic回归"><span class="toc-number">4.</span> <span class="toc-text">梯度下降法用于Logistic回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高级优化"><span class="toc-number">5.</span> <span class="toc-text">高级优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多分类问题拓展"><span class="toc-number">6.</span> <span class="toc-text">多分类问题拓展</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -368,9 +214,9 @@ Cost(h_{\theta}(x^{(i)}),y^{(i)})=
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
