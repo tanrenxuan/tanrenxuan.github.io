@@ -6,15 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Trenx</title>
+  <title>神经网络-反向传播 | Trenx</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Trenx">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="前言在上一章中，我们已经学习了神经网络的“前向传播”算法，即当已知参数的情况下，如何根据输入值最终得到输出值。本章，我们将学习“反向传播”算法，即如何得到最优参数。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="神经网络-反向传播">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/index.html">
 <meta property="og:site_name" content="Trenx">
+<meta property="og:description" content="前言在上一章中，我们已经学习了神经网络的“前向传播”算法，即当已知参数的情况下，如何根据输入值最终得到输出值。本章，我们将学习“反向传播”算法，即如何得到最优参数。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/3.png">
+<meta property="article:published_time" content="2020-03-16T04:53:23.000Z">
+<meta property="article:modified_time" content="2020-03-16T09:45:28.000Z">
 <meta property="article:author" content="Trenx">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="神经网络">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Trenx" type="application/atom+xml">
   
@@ -134,132 +144,190 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-神经网络-反向传播" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-02-11T10:23:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/11/%E5%9F%BA%E4%BA%8Ehexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">基于hexo和github搭建个人博客</a>
+    <h1 class="article-title" itemprop="name">
+      神经网络-反向传播
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/" class="archive-article-date">
+  	<time datetime="2020-03-16T04:53:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在上一章中，我们已经学习了神经网络的“前向传播”算法，即当已知参数的情况下，如何根据输入值最终得到输出值。本章，我们将学习“反向传播”算法，即如何得到最优参数。<br><a id="more"></a></p>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>为了得到最优参数，我们首先需要给出损失函数。先来定义一些必要参数：</p>
+<ul>
+<li>L=total number of layer in the network</li>
+<li>$s_l$=number of units(not counting bias unit) in layer l</li>
+<li>K=number of output units/classes</li>
+</ul>
+<p>K是输出层的单元个数，若$K=1$，即表明是二分类的问题；若$K\geq3$,则表明是K分类问题。<br>那么我们的损失函数肯定需要将每一个输出层的单元都考虑到(这是区别于二分类的地方)<br>举个例子，假如我们要解决三分类问题，显然，输出层有三个单元，即$K=3$,那么对于某一个样本$(x^{(i)},y^{(i)})$,其中$y^{(i)}$是一个三维向量，且满足其中只有一个为1，其余两个为0。比如说是(0,0,1)。此时，若通过我们已知的参数通过前向传播算法，便可以计算出对应的$h_\theta(x^{(i)})$,这是和$y^{(i)}$具有相同维度(3)的向量，其中的值都是根据sigmoid函数算出的，介于(0,1)之间的值，为了方便，比如说是(0.6,0.1,0.4)。那如果算这个样本的损失函数呢？显然，我们不能仅仅只考虑其中某一个输出，而是将这三个值与$y^{(i)}$综合比较，所以需要将$h_\theta(x^{(i)})$与$y^{(i)}$比较，将$h_\theta(x^{(i)})(2)$与$y^{(i)}(2)$比较，将$h_\theta(x^{(i)})(3)$与$y^{(i)}(3)$比较，最终的损失值相加才能得到最终关于这一样本的损失函数值。因此，不失一般性的，我们将损失函数修正为如下:</p>
+<script type="math/tex; mode=display">J(\Theta)=-\frac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}\big[y_k^{(i)}log((h_\Theta(x^{(i)}))_k) + (1-y_k^{(i)})log(1-(h_\Theta(x^{(i)}))_k) \big]+\frac{\lambda}{2m}\sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\Theta_{j,i}^{(l)})^2</script><p>前一项其实就多了一项$\sum_{k=1}^{K}$，这在前面已经解释清楚了，至于后面一项正则化，别看公式挺复杂，其实很简单，就是将连接相邻层的所有参数矩阵$\Theta^i$中的每一个参数的平方相加。但是，这里和之前Logistic回归中的正则化一样，不考虑偏置单元(Bias Unit)，所以，任何与偏置单元有关的参数都不放入这个相加的式子中，这也解释了$\sum_{i=1}^{s_l}$，因为在第l层到第l+1层的参数矩阵中，按道理应当有$S_{l+1}$行，$S_l+1$列的，而这里列数少一，就是没有计算第l层偏置单元出发的那些参数。</p>
+<h2 id="反向传播-BP算法"><a href="#反向传播-BP算法" class="headerlink" title="反向传播(BP算法)"></a>反向传播(BP算法)</h2><p>反向传算法是用来<strong>最小化损失函数</strong>的。<br>正如我们在线性回归与Logistic回归中使用梯度下降法一样，我们的目标是<strong>$min_\Theta J(\Theta)$</strong><br>我们可以使用反向传播算法:<br><img src="/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/1.png" alt="avatar"><br>如上图所示，我们定义了一个参数<strong>$\delta_j^{(l)}$=“error” of node j in l layer</strong><br>比如说如上面这个神经网络的模型，我们想要计算输出层这一个单元的“误差”，我们可以这样计算:</p>
+<script type="math/tex; mode=display">\delta_j^{(l)}=a_j^{(4)}-y_j</script><p>其中$a_j^{(4)}$是我们通过<strong>前向传播</strong>计算出来的该单元的值，与它实际的值相减就是该单元的误差。<br>那么最后一层的单元数自然可以这样通过简单的减法来计算它的“误差”。那前面各个隐藏层的单元的“误差”由于根本不知道它们本应该是多少，就不能这样算。但幸好，可以“从后往前”反推。如下:</p>
+<script type="math/tex; mode=display">\delta^{(3)}=(\Theta^{(3)})^T\delta^{(4)}.*g'(z^{(3)})</script><script type="math/tex; mode=display">\delta^{(2)}=(\Theta^{(2)})^T\delta^{(3)}.*g'(z^{(2)})</script><p>通过证明，可知，$g’(z^{(3)})=a^{(3)}.*(1-a^{(3)})$<br><em>注意，没有$\delta^{(1)}$，因为第一层是输入层，没有“误差这一说”</em>。<br>根据上面这个算法，我么可以通过输出层，将所有隐藏层的所有单元的$\delta$都算出来。当然，这还不算完事，因为这只是每个单元的”误差”，而我们需要的是每个参数的导数值,那么如何计算每一个参数的导数值呢？如下所示：</p>
+<script type="math/tex; mode=display">\frac{\partial}{\partial \Theta_{ij}^{(l)}}J(\Theta)=a_j^{(l)}\delta_i^{(l+1)}</script><p>说白了，我们知道在神经网络模型中，每一个从第l层到第l+1层的箭头表示一个参数，那么该参数的导数值就等于箭头起始单元的激活值(a)乘以箭头指向的单元的“误差”($\delta$)。当然了，这是没有正则化的情况下，当考虑了正则化时，由于损失函数多了最后一项，那么自然每一个参数的导数值也会有所改变。如下：</p>
+<script type="math/tex; mode=display">\frac{\partial}{\partial \Theta_{ij}^{(l)}}J(\Theta)=\frac{1}{m}a_j^{(l)}\delta_i^{(l+1)}+\lambda\Theta_{ij}^{(l)}(j\neq 0)</script><script type="math/tex; mode=display">\frac{\partial}{\partial \Theta_{ij}^{(l)}}J(\Theta)=\frac{1}{m}a_j^{(l)}\delta_i^{(l+1)}(j=0)</script><p><strong>注意，以上所有的推导过程都只是一个样本最终算出来的。换而言之，最终得出的每个参数的偏导数的值应当是每一个样本计算出的该参数的偏导数的值累加的结果</strong><br>总结一下，我们的反向传播算法如下：<br><img src="/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/2.png" alt="avatar"><br>这里需要说明一点，$\Delta^{(l)}=\Delta^{(l)}+\delta^{(l+1)}(a^{(l)})^T$</p>
+<h2 id="梯度检测"><a href="#梯度检测" class="headerlink" title="梯度检测"></a>梯度检测</h2><p>为什么要梯度检测呢？因为在我们使用反向传播计算各个参数的导数值时可能会产生一些意想不到的bug从而导致最终算出的最优参数不一定达到最优值。因此，我们可以通过估算的方式找出每一个参数导数值的近似解，并与我们用反向传播得出的值进行对比。<br>参数的偏导数值的近似解如下:</p>
+<script type="math/tex; mode=display">\frac{\partial}{\partial \Theta}J(\Theta)\approx\frac{J(\Theta+\epsilon)-J(\Theta-\epsilon)}{2\epsilon}</script><p><em>注意，我们在这里将所有参数矩阵中的所有参数全部放在一个列向量中，得到了$\Theta$</em><br>所以，我们可以得到如下式子:</p>
+<script type="math/tex; mode=display">\frac{\partial}{\partial \Theta}J(\Theta)\approx\frac{J(\Theta_1,...,\Theta_j+\epsilon,...,\Theta_n)-J(\Theta_1,...,\Theta_j-\epsilon,...,\Theta_n)}{2\epsilon}</script><p>$\epsilon=10^{-4}$，当然，也可以取其他一些比较小的值，但不能太小。<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">epsilon = <span class="number">1e-4</span>;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:n,</span><br><span class="line">  thetaPlus = theta;</span><br><span class="line">  thetaPlus(<span class="built_in">i</span>) += epsilon;</span><br><span class="line">  thetaMinus = theta;</span><br><span class="line">  thetaMinus(<span class="built_in">i</span>) -= epsilon;</span><br><span class="line">  gradApprox(<span class="built_in">i</span>) = (J(thetaPlus) - J(thetaMinus))/(<span class="number">2</span>*epsilon)</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure><br><strong>注意，这个估算算法十分耗时，所以我们一般仅仅用一次来确认（比如在第一次）。一旦确认成功，即反向传播算出的偏导数值的确与这个估算差不多，我们就认为该反向传播算法没有问题，之后每次改变参数值继续计算它们偏导数值的时候就不要再用这个估算算法了</strong></p>
+<h2 id="随机初始化"><a href="#随机初始化" class="headerlink" title="随机初始化"></a>随机初始化</h2><h3 id="为什么不能直接初始化为0？"><a href="#为什么不能直接初始化为0？" class="headerlink" title="为什么不能直接初始化为0？"></a>为什么不能直接初始化为0？</h3><p>我们在以前的算法中，都要给出$\Theta$的初始值，一般可以直接全部赋值为0。然而在神经网络中，我们不能够这样做。现在来解释为什么。<br><img src="/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/3.png" alt="avatar"><br>如上图所示，我们试想在第一层到第二层之间的参数矩阵全为0，我们用直线表示参数。现在，我们用正向传播算法来算每一个单元的激活值。<br>由于$a_1^{(2)}=g(z_1^{(2)})$,$a_2^{(2)}=g(z_2^{(2)})$。而$z_1^{(2)}$=1*蓝线1参数+$x_1$*红线1参数+$x_2$*绿线1参数，$z_2^{(2)}$=1*蓝线2参数+$x_1$*红线2参数+$x_2$*绿线2参数。由于一开始所有参数都为0，所以代入可以知道$a_1^{(2)}=a_2^{(2)}$。<br>那么在利用反向传播计算偏导数值时，由于第二层到第三层之间的两个标有淡蓝色线的参数一开始也为0。所以,计算出的$\delta_1^{(2)}$和$\delta_2^{(2)}$的值是相等的。<br>那么蓝线1参数的偏导数等于该单元激活值乘以$a_1^{(2)}$,蓝线2参数的偏导数等于该单元激活值乘以$a_2^{(2)}$。显然，它们是相等的。与蓝色一样，红色1与红色2表示的参数值的偏导数一样，绿色1和绿色2表示的参数值的偏导数也是一样的。那么，在用梯度下降法时，每种颜色内部参数的初值一样，偏导数一样，那么最后更新后的值也是一样的。<br>所以说，无论经过多少次迭代。虽然他们的参数都不再是0，但是相同颜色所表示的参数值永远都是一样的。这就意味着用正向传播算法时所计算出的隐藏层虽然单元数很多，但是值都是一样的。显然，这样的模型存在问题。我们知道，隐藏层计算出来的这些单元都是用来表示输入的 不同特点的，现在都是一样的，就意味着仅仅得出来了一种特点，所以该模型无法表达很多复杂的函数，也就不能够很好的给出结果。</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">If the dimensions of Theta1 is <span class="number">10</span>x11, Theta2 is <span class="number">10</span>x11 and Theta3 is <span class="number">1</span>x11.</span><br><span class="line"></span><br><span class="line">Theta1 = <span class="built_in">rand</span>(<span class="number">10</span>,<span class="number">11</span>) * (<span class="number">2</span> * INIT_EPSILON) - INIT_EPSILON;</span><br><span class="line">Theta2 = <span class="built_in">rand</span>(<span class="number">10</span>,<span class="number">11</span>) * (<span class="number">2</span> * INIT_EPSILON) - INIT_EPSILON;</span><br><span class="line">Theta3 = <span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">11</span>) * (<span class="number">2</span> * INIT_EPSILON) - INIT_EPSILON;</span><br></pre></td></tr></table></figure>
+<p>这可以确保每一个参数的初始值都在($-\epsilon$,$\epsilon$)之间，而不再都为0.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最后，我们来总结一下这个算法究竟需要我们做什么事。<br>首先，我们挑选出一个神经网络模型。注意，输入层的个数是给定的；而输出层的个数也是根据实际问题(什么样的分类问题)决定的。那么变数自然就是隐藏层，隐藏层可以选1层、2层等等。而一般情况下，我们都只采用1层隐藏层。那么某一隐藏层中单元数应当选多少？一般来说，越多越好，当然了，越多意味着计算损失函数的代价(时间消耗)更大，因此我们应当权衡好。那么，如果选了多个隐藏层，最好使得每一个隐藏层的单元数一样多。<br>有了神经网络模型后，我们就按照如下步骤进行：</p>
+<ol>
+<li>随机初始化权重(参数值)</li>
+<li>对于每一个样本，利用正向传播计算出隐藏层的激活值和最后输出层的值</li>
+<li>计算出损失函数值</li>
+<li>利用反向传播算法计算每个参数的偏导数</li>
+<li>利用梯度检测来确保你的反向传播算法能够正确工作(只需要依次检查，之后迭代过程不需要)</li>
+<li>使用梯度下降(自己编写)或者直接用内置优化函数来最小化损失函数，同时得出最优参数值</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">博客搭建</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">神经网络</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-02-11T08:14:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/15/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%89%8D%E5%90%91%E4%BC%A0%E6%92%AD/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">神经网络-前向传播</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">自我介绍</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#损失函数"><span class="toc-number">2.</span> <span class="toc-text">损失函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向传播-BP算法"><span class="toc-number">3.</span> <span class="toc-text">反向传播(BP算法)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度检测"><span class="toc-number">4.</span> <span class="toc-text">梯度检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#随机初始化"><span class="toc-number">5.</span> <span class="toc-text">随机初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么不能直接初始化为0？"><span class="toc-number">5.1.</span> <span class="toc-text">为什么不能直接初始化为0？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法"><span class="toc-number">5.2.</span> <span class="toc-text">解决方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/10/hello-world/" class="archive-article-date">
-  	<time datetime="2020-02-10T07:37:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-10</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/10/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
   
 
 
@@ -283,8 +351,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
