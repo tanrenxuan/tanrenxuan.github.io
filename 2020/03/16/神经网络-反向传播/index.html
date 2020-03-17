@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/2.png">
 <meta property="og:image" content="http://yoursite.com/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/3.png">
 <meta property="article:published_time" content="2020-03-16T04:53:23.000Z">
-<meta property="article:modified_time" content="2020-03-16T09:45:28.000Z">
+<meta property="article:modified_time" content="2020-03-17T10:09:07.000Z">
 <meta property="article:author" content="Trenx">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="神经网络">
@@ -177,7 +177,7 @@
 <script type="math/tex; mode=display">\delta_j^{(l)}=a_j^{(4)}-y_j</script><p>其中$a_j^{(4)}$是我们通过<strong>前向传播</strong>计算出来的该单元的值，与它实际的值相减就是该单元的误差。<br>那么最后一层的单元数自然可以这样通过简单的减法来计算它的“误差”。那前面各个隐藏层的单元的“误差”由于根本不知道它们本应该是多少，就不能这样算。但幸好，可以“从后往前”反推。如下:</p>
 <script type="math/tex; mode=display">\delta^{(3)}=(\Theta^{(3)})^T\delta^{(4)}.*g'(z^{(3)})</script><script type="math/tex; mode=display">\delta^{(2)}=(\Theta^{(2)})^T\delta^{(3)}.*g'(z^{(2)})</script><p>通过证明，可知，$g’(z^{(3)})=a^{(3)}.*(1-a^{(3)})$<br><em>注意，没有$\delta^{(1)}$，因为第一层是输入层，没有“误差这一说”</em>。<br>根据上面这个算法，我么可以通过输出层，将所有隐藏层的所有单元的$\delta$都算出来。当然，这还不算完事，因为这只是每个单元的”误差”，而我们需要的是每个参数的导数值,那么如何计算每一个参数的导数值呢？如下所示：</p>
 <script type="math/tex; mode=display">\frac{\partial}{\partial \Theta_{ij}^{(l)}}J(\Theta)=a_j^{(l)}\delta_i^{(l+1)}</script><p>说白了，我们知道在神经网络模型中，每一个从第l层到第l+1层的箭头表示一个参数，那么该参数的导数值就等于箭头起始单元的激活值(a)乘以箭头指向的单元的“误差”($\delta$)。当然了，这是没有正则化的情况下，当考虑了正则化时，由于损失函数多了最后一项，那么自然每一个参数的导数值也会有所改变。如下：</p>
-<script type="math/tex; mode=display">\frac{\partial}{\partial \Theta_{ij}^{(l)}}J(\Theta)=\frac{1}{m}a_j^{(l)}\delta_i^{(l+1)}+\lambda\Theta_{ij}^{(l)}(j\neq 0)</script><script type="math/tex; mode=display">\frac{\partial}{\partial \Theta_{ij}^{(l)}}J(\Theta)=\frac{1}{m}a_j^{(l)}\delta_i^{(l+1)}(j=0)</script><p><strong>注意，以上所有的推导过程都只是一个样本最终算出来的。换而言之，最终得出的每个参数的偏导数的值应当是每一个样本计算出的该参数的偏导数的值累加的结果</strong><br>总结一下，我们的反向传播算法如下：<br><img src="/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/2.png" alt="avatar"><br>这里需要说明一点，$\Delta^{(l)}=\Delta^{(l)}+\delta^{(l+1)}(a^{(l)})^T$</p>
+<script type="math/tex; mode=display">\frac{\partial}{\partial \Theta_{ij}^{(l)}}J(\Theta)=\frac{1}{m}a_j^{(l)}\delta_i^{(l+1)}+\frac{\lambda}{m}\Theta_{ij}^{(l)}(j\neq 0)</script><script type="math/tex; mode=display">\frac{\partial}{\partial \Theta_{ij}^{(l)}}J(\Theta)=\frac{1}{m}a_j^{(l)}\delta_i^{(l+1)}(j=0)</script><p><strong>注意，以上所有的推导过程都只是一个样本最终算出来的。换而言之，最终得出的每个参数的偏导数的值应当是每一个样本计算出的该参数的偏导数的值累加的结果</strong><br>总结一下，我们的反向传播算法如下：<br><img src="/2020/03/16/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/2.png" alt="avatar"><br>这里需要说明一点，$\Delta^{(l)}=\Delta^{(l)}+\delta^{(l+1)}(a^{(l)})^T$</p>
 <h2 id="梯度检测"><a href="#梯度检测" class="headerlink" title="梯度检测"></a>梯度检测</h2><p>为什么要梯度检测呢？因为在我们使用反向传播计算各个参数的导数值时可能会产生一些意想不到的bug从而导致最终算出的最优参数不一定达到最优值。因此，我们可以通过估算的方式找出每一个参数导数值的近似解，并与我们用反向传播得出的值进行对比。<br>参数的偏导数值的近似解如下:</p>
 <script type="math/tex; mode=display">\frac{\partial}{\partial \Theta}J(\Theta)\approx\frac{J(\Theta+\epsilon)-J(\Theta-\epsilon)}{2\epsilon}</script><p><em>注意，我们在这里将所有参数矩阵中的所有参数全部放在一个列向量中，得到了$\Theta$</em><br>所以，我们可以得到如下式子:</p>
 <script type="math/tex; mode=display">\frac{\partial}{\partial \Theta}J(\Theta)\approx\frac{J(\Theta_1,...,\Theta_j+\epsilon,...,\Theta_n)-J(\Theta_1,...,\Theta_j-\epsilon,...,\Theta_n)}{2\epsilon}</script><p>$\epsilon=10^{-4}$，当然，也可以取其他一些比较小的值，但不能太小。<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">epsilon = <span class="number">1e-4</span>;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:n,</span><br><span class="line">  thetaPlus = theta;</span><br><span class="line">  thetaPlus(<span class="built_in">i</span>) += epsilon;</span><br><span class="line">  thetaMinus = theta;</span><br><span class="line">  thetaMinus(<span class="built_in">i</span>) -= epsilon;</span><br><span class="line">  gradApprox(<span class="built_in">i</span>) = (J(thetaPlus) - J(thetaMinus))/(<span class="number">2</span>*epsilon)</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure><br><strong>注意，这个估算算法十分耗时，所以我们一般仅仅用一次来确认（比如在第一次）。一旦确认成功，即反向传播算出的偏导数值的确与这个估算差不多，我们就认为该反向传播算法没有问题，之后每次改变参数值继续计算它们偏导数值的时候就不要再用这个估算算法了</strong></p>
@@ -466,15 +466,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">自我介绍</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">自我介绍</a>
               </li>
              
               <li class="article-tag-list-item">
