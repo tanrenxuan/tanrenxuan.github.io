@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 自我介绍 | Trenx</title>
+  <title>机器学习误差分析 | Trenx</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Trenx">
-<meta property="og:url" content="http://yoursite.com/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/index.html">
+  <meta name="description" content="前言在运用机器学习解决实际问题的过程中，有一些比较好的设计思路。沿着这种思路，或许能够更快的找到问题所在，并加以解决。 误差分析我们在构建机器学习模型的过程中，比较推荐的方法如下：  从一个简单模型入手，使你能够快速构建出一个完整体系。然后实现它并在交叉验证集上进行测试 画出学习曲线来判断是过拟合还是欠拟合问题，以此为依据来决定是否需要更多的数据、更多的特征。 误差分析：人为的去检查那些在你的模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习误差分析">
+<meta property="og:url" content="http://yoursite.com/2020/03/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="Trenx">
+<meta property="og:description" content="前言在运用机器学习解决实际问题的过程中，有一些比较好的设计思路。沿着这种思路，或许能够更快的找到问题所在，并加以解决。 误差分析我们在构建机器学习模型的过程中，比较推荐的方法如下：  从一个简单模型入手，使你能够快速构建出一个完整体系。然后实现它并在交叉验证集上进行测试 画出学习曲线来判断是过拟合还是欠拟合问题，以此为依据来决定是否需要更多的数据、更多的特征。 误差分析：人为的去检查那些在你的模型">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/03/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90/1.png">
+<meta property="article:published_time" content="2020-03-23T06:53:32.000Z">
+<meta property="article:modified_time" content="2020-03-23T07:29:10.000Z">
 <meta property="article:author" content="Trenx">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="误差分析">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Trenx" type="application/atom+xml">
   
@@ -134,60 +142,173 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-机器学习误差分析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-02-11T08:14:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a>
+    <h1 class="article-title" itemprop="name">
+      机器学习误差分析
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/03/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2020-03-23T06:53:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在运用机器学习解决实际问题的过程中，有一些比较好的设计思路。沿着这种思路，或许能够更快的找到问题所在，并加以解决。</p>
+<h2 id="误差分析"><a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h2><p>我们在构建机器学习模型的过程中，比较推荐的方法如下：</p>
+<ul>
+<li>从一个简单模型入手，使你能够快速构建出一个完整体系。然后实现它并在交叉验证集上进行测试</li>
+<li>画出学习曲线来判断是过拟合还是欠拟合问题，以此为依据来决定是否需要更多的数据、更多的特征。</li>
+<li>误差分析：人为的去检查那些在你的模型中得到错误结果的样本。仔细研究它们之间的共性，并以此得到改进的方案。</li>
+</ul>
+<p>关于最后一点，我举个例子。现在我们训练一个这样的模型：能够将垃圾邮件识别出来。我们如果构建出了一个模型，在容量为500的交叉验证集中，有100个分类错误。那么我们需要去观察这些被分类错误的样本，发现它们之间的共性特征。比如：它们大多都是有关“医药广告”的垃圾邮件。这时候，我们可以重新改进我们的模型，当文本中出现有关医药方面单词的邮件，则给他一个更高的概率判断为垃圾邮件。</p>
+<h2 id="偏斜样本的误差分析"><a href="#偏斜样本的误差分析" class="headerlink" title="偏斜样本的误差分析"></a>偏斜样本的误差分析</h2><p>在实际生活中，往往会出现这样一种样本集：不同种类的样本之间的数量差距很大。比如有关癌症分类的样本。在1000个样本中，可能往往只有一个癌症患者。放在平常，1%的错误率或许还算不错，但是放在这个样本集中，可以说是非常糟糕。因为如果我的机器学习算法直接令输出为“非癌症患者”，其错误率(1/1000)都比1%要低。所以，针对这类样本，我们应当提出其他比较模型好坏的度量方法。<br><img src="/2020/03/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90/1.png" alt="avatar"><br>如上图所示，我们提出了两个参数：<strong>精确率</strong>和<strong>召回率</strong>。</p>
+<script type="math/tex; mode=display">精确率=\frac{实际为真且预测为真}{预测为真}</script><script type="math/tex; mode=display">召回率=\frac{实际为真且预测为真}{实际为真}</script><h3 id="精确率vs召回率"><a href="#精确率vs召回率" class="headerlink" title="精确率vs召回率"></a>精确率vs召回率</h3><p>在Logistic回归中，我们以0.5为分界点:<br>Predict 1 if$h<em>\theta(x)\geq0.5$<br>Predict 0 if$h</em>\theta(x)&lt;0.5$<br>这种分类比较的平均，但是在实际问题中我们往往可以根据自己的目的来更改临界点。<br>比如在癌症分类问题中。如果我们想要更高的精确率，即：当我们预测一个人为癌症患者时，他就有非常大的可能性就是癌症患者。所以我们可能会将临界点调整到<strong>0.9</strong>。这就表明，只有当我们有很大把握认为他是癌症患者时才会将他判断为癌症患者。如果我们想要更高的召回率，即：我们想要尽可能的将癌症患者全部找出来。我们就将临界点调整至0.1。这时，只要一个人有一点概率为癌症患者，我们都认为他是癌症患者。我们可能会发现，这两者有时候可能会比较矛盾，即当我们想要召回率高时，精确率可能较低；当我们想要精确率高时，召回率会比较低。这应该根据具体问题具体分析。当然，我们自然也可以综合这两个指标来衡量一个模型总体的好坏。据此，我们提出了$F_1$参数。</p>
+<script type="math/tex; mode=display">F_1=2\frac{PR}{P+R}</script><p>其中P表示精确率，R表示召回率。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">自我介绍</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">误差分析</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/03/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%BA%94%E7%94%A8%E6%8A%80%E5%B7%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">机器学习的应用技巧</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#误差分析"><span class="toc-number">2.</span> <span class="toc-text">误差分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#偏斜样本的误差分析"><span class="toc-number">3.</span> <span class="toc-text">偏斜样本的误差分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#精确率vs召回率"><span class="toc-number">3.1.</span> <span class="toc-text">精确率vs召回率</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -210,9 +331,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
